@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Obat UKS | UKS SmartCare</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+:root{
+  --red:#c8102e;
+  --red-dark:#a50e26;
+  --dark:#212529;
+  --gray:#6c757d;
+  --soft:#fff1f1;
+  --bg:#f9fafb;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Poppins',sans-serif;
+  background:var(--bg);
+  color:var(--dark);
+  padding-top:90px;
+  animation:fadePage .6s ease;
+}
+
+@keyframes fadePage{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:none}
+}
+
+/* ===== BG ANIM ===== */
+.bg-lines{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  background:
+    linear-gradient(120deg,transparent 40%,rgba(0,0,0,.03) 50%,transparent 60%),
+    linear-gradient(-120deg,transparent 40%,rgba(0,0,0,.03) 50%,transparent 60%);
+  animation:moveBg 18s linear infinite;
+}
+@keyframes moveBg{
+  from{background-position:0 0,0 0}
+  to{background-position:800px 0,-800px 0}
+}
+
+/* ===== NAVBAR ===== */
+header{
+  position:fixed;
+  top:0;left:0;width:100%;
+  background:#fff;
+  z-index:100;
+  box-shadow:0 8px 25px rgba(0,0,0,.08);
+  transition:.3s;
+}
+header.scrolled{
+  box-shadow:0 16px 40px rgba(0,0,0,.18);
+}
+.navbar{
+  max-width:1200px;
+  margin:auto;
+  padding:18px 6%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.logo{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  font-size:22px;
+  font-weight:800;
+  color:var(--red);
+}
+.nav-menu{
+  display:flex;
+  gap:28px;
+}
+.nav-menu a{
+  text-decoration:none;
+  font-size:14px;
+  font-weight:600;
+  color:#333;
+  position:relative;
+}
+.nav-menu a::after{
+  content:'';
+  position:absolute;
+  left:0;bottom:-6px;
+  width:0;height:3px;
+  background:var(--red);
+  transition:.3s;
+}
+.nav-menu a:hover::after{width:100%}
+
+/* ===== CONTENT ===== */
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:40px 6% 80px;
+  text-align:center;
+}
+
+/* TITLE */
+.title{
+  margin-bottom:40px;
+}
+.title h1{
+  font-size:26px;
+  font-weight:700;
+  letter-spacing:.3px;
+}
+.title h1::after{
+  content:'';
+  display:block;
+  width:50px;height:4px;
+  background:var(--red);
+  margin:14px auto 0;
+  border-radius:99px;
+}
+.title p{
+  margin-top:10px;
+  color:var(--gray);
+  font-size:14px;
+}
+
+/* ===== INVENTORY ===== */
+.inventory{
+  margin-top:40px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:24px;
+}
+
+.item{
+  background:#fff;
+  padding:22px 24px;
+  border-radius:18px;
+  box-shadow:0 14px 35px rgba(0,0,0,.1);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  transition:.35s;
+  animation:fadeCard .6s ease;
+}
+@keyframes fadeCard{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:none}
+}
+.item:hover{
+  transform:translateY(-8px);
+  box-shadow:0 24px 50px rgba(0,0,0,.18);
+}
+
+.item-info{
+  text-align:left;
+}
+.item-info h3{
+  font-size:16px;
+  font-weight:700;
+}
+.item-info span{
+  font-size:13px;
+  color:var(--gray);
+}
+
+/* STATUS */
+.status{
+  padding:6px 16px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:700;
+}
+.ada{background:#eafaf1;color:#2ecc71}
+.menipis{background:#fff6e6;color:#f39c12}
+.habis{background:#fdeaea;color:#e74c3c}
+
+/* ===== FOOTER ===== */
+footer{
+  background:var(--red);
+  color:#fff;
+  margin-top:80px;
+}
+.footer-wrap{
+  max-width:1200px;
+  margin:auto;
+  padding:80px 6% 30px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:40px;
+}
+footer h3{font-size:18px;margin-bottom:14px}
+footer p{font-size:14px;line-height:1.7;opacity:.9}
+.social a{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:38px;height:38px;
+  border-radius:10px;
+  background:rgba(255,255,255,.18);
+  color:#fff;
+  margin-right:10px;
+  transition:.3s;
+}
+.social a:hover{background:#fff;color:var(--red)}
+.footer-bottom{
+  text-align:center;
+  padding-bottom:30px;
+  font-size:13px;
+  opacity:.85;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .title h1{font-size:22px}
+}
+
+/* BURGER MENU */
+.menu-btn{
+  display:none;
+  font-size:24px;
+  cursor:pointer;
+}
+@media(max-width:768px){
+  .menu-btn{display:block}
+  .nav-menu{
+    position:absolute;
+    top:70px; right:6%;
+    background:#fff;
+    flex-direction:column;
+    padding:20px 26px;
+    border-radius:16px;
+    gap:16px;
+    box-shadow:0 12px 30px rgba(0,0,0,.12);
+    display:none;
+  }
+  .nav-menu.active{display:flex}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="bg-lines"></div>
+
+<header>
+    <div class="navbar">
+      <div class="logo"><i class="fa-solid fa-heart-pulse"></i> UKS SmartCare</div>
+      <i class="fa-solid fa-bars menu-btn" onclick="toggleMenu()"></i>
+      <nav class="nav-menu" id="navMenu">
+        <a href="halamancivitas.html#home">Beranda</a>
+            <a href="halamancivitas.html#fitur">Fitur</a>
+            <a href="halamancivitas.html#jadwal">Jadwal</a>
+            <a href="halamancivitas.html#kontak">Tentang</a>
+      </nav>
+    </div>
+  </header>
+  
+
+<main class="container">
+
+<div class="title">
+  <h1>Inventaris Obat UKS</h1>
+  <p>Status ketersediaan obat yang tersimpan di UKS</p>
+</div>
+
+<section class="inventory">
+  <div class="item">
+    <div class="item-info">
+      <h3>Paracetamol</h3>
+      <span>Demam / Nyeri</span>
+    </div>
+    <div class="status ada">Tersedia</div>
+  </div>
+
+  <div class="item">
+    <div class="item-info">
+      <h3>Etabion</h3>
+      <span></span>
+    </div>
+    <div class="status menipis">Menipis</div>
+  </div>
+
+  <div class="item">
+    <div class="item-info">
+      <h3>Ibuprofen</h3>
+      <span>Luka</span>
+    </div>
+    <div class="status habis">Habis</div>
+  </div>
+
+<div class="item">
+    <div class="item-info">
+      <h3>Betadine</h3>
+      <span>Luka</span>
+    </div>
+    <div class="status habis">Habis</div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-wrap">
+    <div>
+      <h3>UKS SmartCare</h3>
+      <p>Sistem layanan kesehatan sekolah berbasis digital.</p>
+    </div>
+    <div>
+      <h3>Kontak</h3>
+      <p><i class="fa-solid fa-location-dot"></i> SMKN 1 Cibinong</p>
+      <p><i class="fa-solid fa-phone"></i> 0812-3456-7890</p>
+      <p><i class="fa-solid fa-envelope"></i> uks.smartcare@gmail.com</p>
+    </div>
+    <div>
+      <h3>Sosial Media</h3>
+      <div class="social">
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-tiktok"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 UKS SmartCare</div>
+</footer>
+
+<script>
+const navMenu = document.getElementById('navMenu');
+function toggleMenu() {
+  navMenu.classList.toggle('active');
+}
+
+window.addEventListener("scroll",()=>{
+  document.querySelector("header")
+    .classList.toggle("scrolled",scrollY>50);
+});
+</script>
+
+</body>
+</html>

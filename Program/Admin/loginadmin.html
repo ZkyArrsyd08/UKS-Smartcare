@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login Admin | UKS SmartCare</title>
+<link rel="icon" href="../pmi.png" type="image/png">
+<!-- Font & Icon -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+:root{
+  --red:#c8102e;
+  --red-soft:#ffeaea;
+  --dark:#212529;
+  --gray:#6c757d;
+  --font:'Poppins',sans-serif;
+}
+
+/* RESET */
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:var(--font);
+  background:#fff;
+  color:var(--dark);
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow-x:hidden;
+  position:relative;
+}
+
+/* BACKGROUND LINES & FLOAT ICON */
+.bg-lines{
+  position:fixed; inset:0; z-index:-1;
+  background:
+    linear-gradient(120deg,transparent 40%,rgba(0,0,0,.03) 50%,transparent 60%),
+    linear-gradient(-120deg,transparent 40%,rgba(0,0,0,.03) 50%,transparent 60%);
+  animation:moveBg 18s linear infinite;
+}
+@keyframes moveBg{
+  from{background-position:0 0,0 0}
+  to{background-position:800px 0,-800px 0}
+}
+.float-icon{
+  position:absolute;
+  font-size:80px;
+  color:rgba(200,16,46,.06);
+  animation:float 6s ease-in-out infinite;
+}
+.float-1{top:15%;left:5%}
+.float-2{bottom:20%;right:10%;animation-delay:2s}
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-18px)}
+}
+
+/* LOGIN WRAPPER */
+.login-wrapper{
+  display:flex;
+  width:90%;
+  max-width:900px;
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 14px 35px rgba(0,0,0,.15);
+  background:#fff;
+}
+
+/* LEFT PANEL */
+.left-panel{
+  flex:1;
+  background:var(--red);
+  color:#fff;
+  padding:40px 30px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+.left-panel img{
+  width:100px;
+  margin-bottom:20px;
+}
+.left-panel h2{
+  font-size:28px;
+  margin-bottom:14px;
+}
+.left-panel p{
+  font-size:14px;
+  line-height:1.6;
+  opacity:0.9;
+}
+
+/* RIGHT PANEL */
+.right-panel{
+  flex:1;
+  padding:40px 30px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.right-panel h1{
+  font-size:28px;
+  margin-bottom:10px;
+}
+.right-panel p{
+  font-size:14px;
+  margin-bottom:20px;
+  color:var(--gray);
+}
+
+/* FORM */
+.input-group{
+  margin-bottom:18px;
+  display:flex;
+  flex-direction:column;
+}
+.input-group label{
+  font-weight:600;
+  margin-bottom:6px;
+  display:flex;
+  align-items:center;
+}
+.input-group input{
+  padding:12px 14px;
+  border:1px solid #ccc;
+  border-radius:8px;
+  font-size:14px;
+  transition:.3s;
+}
+.input-group input:focus{
+  outline:none;
+  border-color:var(--red);
+  box-shadow:0 4px 12px rgba(200,16,46,.2);
+}
+
+/* BUTTON */
+.btn-login{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:14px 0;
+  width:100%;
+  background:linear-gradient(135deg,var(--red),#ff4d6d);
+  color:#fff;
+  font-weight:700;
+  border:none;
+  border-radius:40px;
+  cursor:pointer;
+  transition:.3s ease;
+  font-size:14px;
+  box-shadow:0 12px 25px rgba(200,16,46,.35);
+}
+.btn-login:hover{
+  transform:translateY(-3px) scale(1.02);
+  box-shadow:0 18px 35px rgba(200,16,46,.45);
+}
+.btn-login:active{transform:scale(.96)}
+
+/* BACK LINKS */
+.back-link{
+  display:block;        
+  margin-top:14px;
+  font-size:13px;
+  color:var(--red);
+  text-decoration:none;
+  transition:.3s;
+}
+.back-link:hover{text-decoration:underline;}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .login-wrapper{
+    flex-direction:column;
+    box-shadow:0 8px 20px rgba(0,0,0,.12);
+  }
+  .left-panel, .right-panel{
+    flex:unset;
+    padding:30px;
+  }
+}
+
+/* ANIMASI MASUK */
+body{
+  animation:pageEnter .8s ease forwards;
+}
+@keyframes pageEnter{
+  from{opacity:0}
+  to{opacity:1}
+}
+</style>
+</head>
+<body>
+  <div class="bg-lines"></div>
+  <i class="fa-solid fa-heart-pulse float-icon float-1"></i>
+  <i class="fa-solid fa-notes-medical float-icon float-2"></i>
+
+  <div class="login-wrapper">
+    <div class="left-panel">
+      <img src="../pmi.png" alt="Logo PMI">
+      <h2>UKS SmartCare</h2>
+      <p>Sistem Informasi Kesehatan Sekolah Berbasis Digital untuk Pengelolaan Data Administrasi dan Pelayanan. Khusus untuk Petugas UKS/Admin.</p>
+    </div>
+    <div class="right-panel">
+      <h1>Login Admin</h1>
+      <p>Masukkan kredensial Anda untuk mengakses Dashboard Administrator.</p>
+
+      <form id="adminLoginForm">
+        <div class="input-group">
+          <label for="username"><i class="fa-solid fa-user-shield" style="margin-right:5px;color:var(--red);"></i> Username</label>
+          <input type="text" id="username" placeholder="Masukkan Username Admin" required>
+        </div>
+        <div class="input-group">
+          <label for="password"><i class="fa-solid fa-lock" style="margin-right:5px;color:var(--red);"></i> Password</label>
+          <input type="password" id="password" placeholder="Masukkan password" required>
+        </div>
+        <button type="submit" class="btn-login">
+          <i class="fa-solid fa-right-to-bracket"></i> MASUK
+        </button>
+      </form>
+
+      <a href="daftar.html" class="back-link">← Daftar Admin</a>
+      <a href="../index.html" class="back-link">← Kembali ke Halaman Utama</a>
+    </div>
+  </div>
+
+<script>
+// Skrip Login Sederhana
+const loginForm = document.getElementById('adminLoginForm');
+loginForm.addEventListener('submit', function(e){
+  e.preventDefault();
+  const username = document.getElementById('username').value.trim();
+  const password = document.getElementById('password').value.trim();
+
+  const dummyUser = { username: "adminuks", password: "password123", nama: "Super Admin" };
+
+  if(username === dummyUser.username && password === dummyUser.password){
+    alert(`Selamat datang, ${dummyUser.nama}! Anda berhasil login.`);
+    // window.location.href = "dashboardadmin.html"; 
+  }else{
+    alert("Username atau password salah. Cek kembali kredensial Anda.");
+  }
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jadwal Jaga Admin | UKS SmartCare</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+  <style>
+    :root {
+      --red: #c8102e;
+      --dark: #212529;
+      --gray: #6c757d;
+      --accent: var(--red);
+      --accent-soft: #ffeaea;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: var(--dark);
+      background: #fff;
+      overflow-x: hidden;
+      animation: pageEnter 0.8s ease forwards;
+    }
+
+    /* BACKGROUND */
+    .bg-lines {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(120deg, transparent 40%, rgba(0,0,0,.03) 50%, transparent 60%),
+                  linear-gradient(-120deg, transparent 40%, rgba(0,0,0,.03) 50%, transparent 60%);
+      animation: moveBg 18s linear infinite;
+    }
+
+    @keyframes moveBg {
+      from { background-position: 0 0, 0 0; }
+      to   { background-position: 800px 0, -800px 0; }
+    }
+
+    .float-icon {
+      position: absolute;
+      font-size: 80px;
+      color: rgba(200,16,46,.06);
+      animation: float 6s ease-in-out infinite;
+    }
+    .float-1 { top: 18%; left: 6%; }
+    .float-2 { bottom: 20%; right: 8%; animation-delay: 2s; }
+
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50%     { transform: translateY(-18px); }
+    }
+
+    /* NAVBAR */
+    header {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      z-index: 100;
+      background: #fff;
+      box-shadow: 0 6px 20px rgba(0,0,0,.08);
+    }
+
+    .navbar {
+      max-width: 1200px;
+      margin: auto;
+      padding: 18px 6%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--red);
+    }
+    .logo i { margin-right: 6px; }
+
+    /* PROFILE */
+    .profile-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+    }
+    .welcome-text {
+      font-size: 14px;
+      line-height: 1.2;
+      text-align: right;
+    }
+    .welcome-text strong { display: block; font-weight: 600; }
+    .profile-icon {
+      width: 45px; height: 45px;
+      border-radius: 50%;
+      overflow: hidden;
+      background: #fff;
+    }
+    .profile-icon img { width: 100%; height: 100%; object-fit: cover; }
+    .profile-dropdown {
+      display: none;
+      position: absolute;
+      top: 55px; right: 0;
+      background: #fff;
+      box-shadow: 0 10px 25px rgba(0,0,0,.25);
+      border-radius: 10px;
+      width: 200px;
+      overflow: hidden;
+      z-index: 101;
+    }
+    .profile-dropdown ul { list-style: none; }
+    .profile-dropdown ul li a {
+      display: block;
+      padding: 12px 15px;
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 500;
+      transition: .3s;
+      font-size: 14px;
+    }
+    .profile-dropdown ul li:last-child a {
+      color: var(--red);
+      border-top: 1px solid #eee;
+      font-weight: 600;
+    }
+    .profile-dropdown ul li a:hover {
+      background: var(--accent-soft);
+      color: var(--red);
+    }
+    .profile-dropdown.active { display: block; }
+
+    /* DASHBOARD */
+    .dashboard-section {
+      padding: 100px 6% 80px;
+      max-width: 1200px;
+      margin: auto;
+      animation: contentEnter 0.9s ease forwards;
+      opacity: 0;
+      transform: translateY(40px);
+    }
+
+    .dashboard-header { text-align: center; margin-bottom: 40px; }
+    .dashboard-header h1 { font-size: 36px; font-weight: 800; color: var(--dark); }
+    .dashboard-header p { font-size: 16px; color: var(--gray); }
+
+    /* TABEL */
+    .table-container { overflow-x: auto; margin-top: 30px; }
+    table { width: 100%; border-collapse: collapse; min-width: 600px; }
+    th, td { padding: 14px 12px; text-align: center; border-bottom: 1px solid #eee; }
+    th { background: var(--accent-soft); color: var(--dark); font-weight: 600; }
+    td button { padding: 6px 12px; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; transition: .3s; }
+    td button.edit { background: #ffc107; color: #fff; }
+    td button.delete { background: #dc3545; color: #fff; }
+    td button:hover { opacity: .9; }
+    .add-btn {
+      display: inline-block;
+      margin-bottom: 16px;
+      padding: 10px 20px;
+      background: linear-gradient(135deg, var(--red), #ff4d6d);
+      color: #fff;
+      border-radius: 40px;
+      font-weight: 700;
+      transition: .3s;
+      cursor: pointer;
+    }
+    .add-btn:hover { transform: scale(1.02); }
+
+    /* MODAL */
+    .modal-bg {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.5);
+      display: none;
+      justify-content: center; align-items: center;
+      z-index: 200;
+    }
+    .modal {
+      background: #fff;
+      padding: 24px 28px;
+      border-radius: 16px;
+      max-width: 400px; width: 90%;
+      position: relative;
+    }
+    .modal h2 { margin-bottom: 16px; font-size: 20px; text-align: center; }
+    .modal label { display: block; margin: 10px 0 4px; font-weight: 500; }
+    .modal input, .modal select { width: 100%; padding: 8px 10px; border-radius: 8px; border: 1px solid #ccc; }
+    .modal button { margin-top: 16px; padding: 10px 16px; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; }
+    .modal .save-btn { background: var(--red); color: #fff; }
+    .modal .cancel-btn { background: #ccc; color: #fff; margin-left: 10px; }
+    .modal .close-btn { position: absolute; top: 12px; right: 12px; font-size: 18px; cursor: pointer; color: var(--gray); }
+
+    /* FOOTER */
+    footer {
+      background: var(--red);
+      color: #fff;
+      margin-top: 80px;
+      animation: contentEnter 0.9s ease forwards;
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    .footer-wrap {
+      max-width: 1200px;
+      margin: auto;
+      padding: 80px 6% 30px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 40px;
+    }
+    footer h3 { font-size: 18px; margin-bottom: 14px; }
+    footer p { font-size: 14px; line-height: 1.7; opacity: .9; }
+    .social a {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 38px; height: 38px; border-radius: 10px;
+      background: rgba(255,255,255,.18); color: #fff; margin-right: 10px;
+      transition: .3s;
+    }
+    .social a:hover { background: #fff; color: var(--red); }
+    .footer-bottom { text-align: center; padding-bottom: 30px; font-size: 13px; opacity: .85; }
+
+    /* ANIMASI MASUK HALAMAN */
+    @keyframes pageEnter { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes contentEnter { to { opacity: 1; transform: translateY(0); } }
+
+    /* RESPONSIVE */
+    @media(max-width: 768px) { .menu-btn { display: block; } }
+    @media(max-width: 480px) {
+      .dashboard-header h1 { font-size: 28px; }
+      table { min-width: 0; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bg-lines"></div>
+  <i class="fa-solid fa-heart-pulse float-icon float-1"></i>
+  <i class="fa-solid fa-notes-medical float-icon float-2"></i>
+
+  <header>
+    <div class="navbar">
+      <div class="logo"><i class="fa-solid fa-heart-pulse"></i> UKS SmartCare</div>
+      <div class="profile-container" id="profileContainer">
+        <div class="welcome-text">Halo, Admin!<strong>Petugas UKS</strong></div>
+        <div class="profile-icon"><img src="../pmi.png" alt="Profile"></div>
+        <div class="profile-dropdown" id="profileDropdown">
+          <ul>
+            <li><a href="halamanadmin.html">Beranda</a></li>
+            <li><a href="biodata.html"><i class="fa-solid fa-user"></i> Profil</a></li>
+            <li><a href="#"><i class="fas fa-cog"></i> Pengaturan</a></li>
+            <li><a href="../index.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="dashboard-section">
+    <div class="dashboard-header">
+      <h1>Jadwal Jaga Admin</h1>
+      <p>Kelola jadwal jaga petugas UKS untuk Minggu 1 dan Minggu 2.</p>
+    </div>
+
+    <button class="add-btn" id="addBtn"><i class="fa-solid fa-plus"></i> Tambah Admin</button>
+
+    <div class="table-container">
+      <table id="jadwalTable">
+        <thead>
+          <tr>
+            <th>Nama</th>
+            <th>Kelas</th>
+            <th>Minggu 1</th>
+            <th>Minggu 2</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Rina</td>
+            <td>5A</td>
+            <td>1A</td>
+            <td>2B</td>
+            <td>
+              <button class="edit"><i class="fa-solid fa-pen"></i></button>
+              <button class="delete"><i class="fa-solid fa-trash"></i></button>
+            </td>
+          </tr>
+          <tr>
+            <td>Dika</td>
+            <td>2B</td>
+            <td>3A</td>
+            <td>4B</td>
+            <td>
+              <button class="edit"><i class="fa-solid fa-pen"></i></button>
+              <button class="delete"><i class="fa-solid fa-trash"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- MODAL TAMBAH / EDIT -->
+  <div class="modal-bg" id="modalBg">
+    <div class="modal">
+      <span class="close-btn" id="closeModal"><i class="fa-solid fa-xmark"></i></span>
+      <h2 id="modalTitle">Tambah Admin</h2>
+      <label>Nama</label>
+      <input type="text" id="adminName" placeholder="Masukkan nama">
+      <label>Kelas</label>
+      <input type="text" id="adminClass" placeholder="Masukkan kelas">
+      <label>Minggu 1</label>
+      <input type="text" id="shift1" placeholder="Contoh: 1A">
+      <label>Minggu 2</label>
+      <input type="text" id="shift2" placeholder="Contoh: 2B">
+      <button class="save-btn" id="saveBtn">Simpan</button>
+      <button class="cancel-btn" id="cancelBtn">Batal</button>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-wrap">
+      <div>
+        <h3>UKS SmartCare</h3>
+        <p>Sistem layanan kesehatan sekolah berbasis digital untuk pengelolaan obat, jadwal piket, dan pelayanan siswa.</p>
+      </div>
+      <div>
+        <h3>Kontak</h3>
+        <p><i class="fa-solid fa-location-dot"></i> SMKN 1 Cibinong</p>
+        <p><i class="fa-solid fa-phone"></i> 0812-3456-7890</p>
+        <p><i class="fa-solid fa-envelope"></i> uks.smartcare@gmail.com</p>
+      </div>
+      <div>
+        <h3>Sosial Media</h3>
+        <div class="social">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-tiktok"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 UKS SmartCare</div>
+  </footer>
+
+  <script>
+    // Profile dropdown
+    const profileContainer = document.getElementById('profileContainer');
+    const profileDropdown = document.getElementById('profileDropdown');
+    profileContainer.addEventListener('click', e => {
+      e.stopPropagation();
+      profileDropdown.classList.toggle('active');
+    });
+    window.addEventListener('click', e => {
+      if(!profileContainer.contains(e.target)) profileDropdown.classList.remove('active');
+    });
+
+    // Modal logic
+    const modalBg = document.getElementById('modalBg');
+    const addBtn = document.getElementById('addBtn');
+    const closeModal = document.getElementById('closeModal');
+    const cancelBtn = document.getElementById('cancelBtn');
+    const saveBtn = document.getElementById('saveBtn');
+    const modalTitle = document.getElementById('modalTitle');
+    const adminName = document.getElementById('adminName');
+    const adminClass = document.getElementById('adminClass');
+    const shift1 = document.getElementById('shift1');
+    const shift2 = document.getElementById('shift2');
+    let editRow = null;
+
+    addBtn.addEventListener('click', () => {
+      modalTitle.textContent = "Tambah Admin";
+      adminName.value = "";
+      adminClass.value = "";
+      shift1.value = "";
+      shift2.value = "";
+      editRow = null;
+      modalBg.style.display = "flex";
+    });
+
+    closeModal.addEventListener('click', () => modalBg.style.display="none");
+    cancelBtn.addEventListener('click', () => modalBg.style.display="none");
+
+    saveBtn.addEventListener('click', () => {
+      if(!adminName.value || !adminClass.value || !shift1.value || !shift2.value){
+        alert("Lengkapi semua field!");
+        return;
+      }
+      const table = document.getElementById('jadwalTable').getElementsByTagName('tbody')[0];
+      if(editRow){
+        // Edit
+        editRow.cells[0].textContent = adminName.value;
+        editRow.cells[1].textContent = adminClass.value;
+        editRow.cells[2].textContent = shift1.value;
+        editRow.cells[3].textContent = shift2.value;
+      } else {
+        // Tambah
+        const newRow = table.insertRow();
+        newRow.insertCell(0).textContent = adminName.value;
+        newRow.insertCell(1).textContent = adminClass.value;
+        newRow.insertCell(2).textContent = shift1.value;
+        newRow.insertCell(3).textContent = shift2.value;
+        const actionCell = newRow.insertCell(4);
+        actionCell.innerHTML = `<button class="edit"><i class="fa-solid fa-pen"></i></button>
+                                <button class="delete"><i class="fa-solid fa-trash"></i></button>`;
+      }
+      modalBg.style.display="none";
+      attachRowEvents();
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UKS SmartCare</title>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+  <style>
+    :root{
+      --red:#c8102e;
+      --dark:#212529;
+      --gray:#6c757d;
+      --accent:var(--red);
+      --accent-soft:#ffeaea;
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:'Poppins',sans-serif;
+      color:var(--dark);
+      background:#fff;
+      overflow-x:hidden;
+    }
+
+    /* BACKGROUND */
+    .bg-lines{
+      position:fixed;
+      inset:0;
+      z-index:-1;
+      background:
+        linear-gradient(120deg,transparent 40%,rgba(0,0,0,.03) 50%,transparent 60%),
+        linear-gradient(-120deg,transparent 40%,rgba(0,0,0,.03) 50%,transparent 60%);
+      animation:moveBg 18s linear infinite;
+    }
+    @keyframes moveBg{
+      from{background-position:0 0,0 0}
+      to{background-position:800px 0,-800px 0}
+    }
+
+    .float-icon{
+      position:absolute;
+      font-size:80px;
+      color:rgba(200,16,46,.06);
+      animation:float 6s ease-in-out infinite;
+    }
+    .float-1{top:18%;left:6%}
+    .float-2{bottom:20%;right:8%;animation-delay:2s}
+    @keyframes float{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-18px)}
+    }
+
+    /* NAVBAR */
+    header{
+      position:fixed;
+      top:0;left:0;width:100%;
+      z-index:100;
+      background:#fff;
+      box-shadow:0 6px 20px rgba(0,0,0,.08);
+    }
+    .navbar{
+      max-width:1200px;
+      margin:auto;
+      padding:18px 6%;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-size:22px;
+      font-weight:800;
+      color:var(--red);
+    }
+    .nav-menu{
+      display:flex;
+      gap:28px;
+    }
+    .nav-menu a{
+      text-decoration:none;
+      font-size:14px;
+      font-weight:600;
+      color:#333;
+      position:relative;
+      padding:6px 0;
+    }
+    .nav-menu a::after{
+      content:'';
+      position:absolute;
+      left:0;bottom:-4px;
+      width:0;height:3px;
+      background:var(--red);
+      border-radius:3px;
+      transition:.3s;
+    }
+    .nav-menu a:hover::after{width:100%}
+    .menu-btn{display:none;font-size:22px;cursor:pointer}
+
+    /* HERO */
+    .hero{
+      min-height:100vh;
+      padding:160px 6% 80px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+    }
+    .hero h1{font-size:52px;font-weight:800}
+    .hero p{margin-top:14px;font-size:16px;color:#555}
+    .hero-btn{
+      display:inline-block;
+      margin-top:28px;
+      padding:14px 42px;
+      background:linear-gradient(135deg,var(--red),#ff4d6d);
+      color:#fff;
+      border-radius:40px;
+      font-weight:700;
+      text-decoration:none;
+      transition:.3s ease;
+      box-shadow:0 12px 25px rgba(200,16,46,.35);
+    }
+    .hero-btn:hover{
+      transform:translateY(-3px) scale(1.02);
+      box-shadow:0 18px 35px rgba(200,16,46,.45);
+    }
+    .hero-btn:active{transform:scale(.96)}
+
+    /* SECTION */
+    .section{
+      padding:90px 6%;
+      max-width:1200px;
+      margin:auto;
+    }
+    .section-title{text-align:center;font-size:34px;font-weight:800}
+    .section-sub{text-align:center;margin:14px 0 44px;color:#666}
+
+    /* CARDS */
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:28px;
+    }
+    .card{
+      background:#fff;
+      padding:32px 26px;
+      text-align:center;
+      border-radius:20px;
+      border-top:5px solid var(--accent);
+      box-shadow:0 14px 35px rgba(0,0,0,.08);
+      transition:.35s cubic-bezier(.4,0,.2,1);
+      cursor:pointer;
+    }
+    .card:hover{
+      transform:translateY(-8px) scale(1.03);
+      box-shadow:0 22px 45px rgba(0,0,0,.15);
+    }
+    .card i{font-size:42px;color:var(--accent);margin-bottom:14px}
+    .card h3{font-size:18px;font-weight:700}
+    .card p{font-size:14px;margin-top:8px;line-height:1.6;color:#555}
+
+    /* TIME BOX */
+    .time-box{
+      margin-top:42px;
+      background:var(--accent-soft);
+      padding:24px;
+      border-radius:16px;
+      text-align:center;
+      font-weight:600;
+    }
+    .time-box span{display:block;margin-top:6px}
+
+    /* FOOTER */
+    footer{
+      background:var(--red);
+      color:#fff;
+      margin-top:80px;
+    }
+    .footer-wrap{
+      max-width:1200px;
+      margin:auto;
+      padding:80px 6% 30px;
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:40px;
+    }
+    footer h3{font-size:18px;margin-bottom:14px}
+    footer p{font-size:14px;line-height:1.7;opacity:.9}
+    .social a{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:38px;height:38px;
+      border-radius:10px;
+      background:rgba(255,255,255,.18);
+      color:#fff;
+      margin-right:10px;
+      transition:.3s;
+    }
+    .social a:hover{background:#fff;color:var(--red)}
+    .footer-bottom{text-align:center;padding-bottom:30px;font-size:13px;opacity:.85}
+
+    /* RESPONSIVE */
+    @media(max-width:768px){
+      .menu-btn{display:block}
+      .nav-menu{
+        position:absolute;
+        top:70px;right:6%;
+        background:#fff;
+        flex-direction:column;
+        padding:20px 26px;
+        border-radius:16px;
+        gap:18px;
+        box-shadow:0 14px 35px rgba(0,0,0,.15);
+        display:none;
+      }
+      .nav-menu.active{display:flex}
+      .hero h1{font-size:38px}
+    }
+
+    /* ===== ANIMASI MASUK HALAMAN ===== */
+body{
+  animation: pageEnter .8s ease forwards;
+}
+
+.hero, .section, footer{
+  opacity:0;
+  transform:translateY(40px);
+  animation: contentEnter .9s ease forwards;
+}
+
+.hero{animation-delay:.2s}
+#fitur{animation-delay:.45s}
+#jadwal{animation-delay:.65s}
+footer{animation-delay:.85s}
+
+@keyframes pageEnter{
+  from{opacity:0}
+  to{opacity:1}
+}
+
+@keyframes contentEnter{
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+.card-link{
+  text-decoration:none;
+  color:inherit;
+}
+.card-link:focus{outline:none}
+.card:active{
+  transform:scale(.96);
+}
+.card{
+  transition:
+    transform .3s cubic-bezier(.4,0,.2,1),
+    box-shadow .3s;
+}
+
+
+  </style>
+</head>
+
+<body>
+  <div class="bg-lines"></div>
+  <i class="fa-solid fa-heart-pulse float-icon float-1"></i>
+  <i class="fa-solid fa-notes-medical float-icon float-2"></i>
+
+  <header>
+    <div class="navbar">
+      <div class="logo"><i class="fa-solid fa-heart-pulse"></i> UKS SmartCare</div>
+      <i class="fa-solid fa-bars menu-btn" onclick="toggleMenu()"></i>
+      <nav class="nav-menu" id="navMenu">
+        <a href="#home">Beranda</a>
+        <a href="#fitur">Fitur</a>
+        <a href="#jadwal">Jadwal</a>
+        <a href="#kontak">Tentang</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" id="home">
+    <div>
+      <h1>UKS SmartCare</h1>
+      <p>Layanan kesehatan sekolah modern, cepat, dan terjadwal rapi</p>
+      <a href="#fitur" class="hero-btn">Mulai</a>
+    </div>
+  </section>
+
+  <!-- FITUR LAYANAN -->
+  <section class="section" id="fitur">
+    <h2 class="section-title">Fitur Layanan</h2>
+    <p class="section-sub">Layanan UKS yang langsung dirasakan siswa</p>
+
+    <div class="cards">
+      <a href="mintaobat.html" class="card-link">
+        <div class="card">
+          <i class="fa-solid fa-pills"></i>
+          <h3>Minta Obat</h3>
+          <p>Permintaan obat siswa tercatat secara digital</p>
+        </div>
+      </a>
+      <a href="stokobat.html" class="card-link">
+      <div class="card">
+        <i class="fa-solid fa-clipboard-list"></i>
+        <h3>Stok Obat</h3>
+        <p>Monitoring ketersediaan obat UKS secara real-time</p>
+      </div>
+    </a>
+    <a href="saranobat.html" class="card-link">
+      <div class="card">
+        <i class="fa-solid fa-notes-medical"></i>
+        <h3>Saran Obat</h3>
+        <p>Rekomendasi obat ringan sesuai keluhan umum siswa</p>
+      </div>
+    </a>
+    </div>
+  </section>
+
+  <!-- JADWAL UKS (TETAP) -->
+  <section class="section" id="jadwal">
+    <h2 class="section-title">Jadwal Piket UKS</h2>
+    <p class="section-sub"><strong id="hari"></strong> — <span id="minggu"></span></p>
+
+    <div class="cards">
+      <div class="card"><i class="fa-solid fa-users"></i><h3 id="p1">-</h3><p>Petugas</p></div>
+      <div class="card"><i class="fa-solid fa-users"></i><h3 id="p2">-</h3><p>Petugas</p></div>
+      <div class="card"><i class="fa-solid fa-users"></i><h3 id="p3">-</h3><p>Petugas</p></div>
+    </div>
+
+    <div class="time-box">
+      <span id="clock">--:--:-- WIB</span>
+      <span id="slot">--</span>
+    </div>
+  </section>
+
+  <footer id="kontak">
+    <div class="footer-wrap">
+      <div>
+        <h3>UKS SmartCare</h3>
+        <p>Sistem layanan kesehatan sekolah berbasis digital untuk pengelolaan obat, jadwal piket, dan pelayanan siswa.</p>
+      </div>
+      <div>
+        <h3>Kontak</h3>
+        <p><i class="fa-solid fa-location-dot"></i> SMKN 1 Cibinong</p>
+        <p><i class="fa-solid fa-phone"></i> 0812-3456-7890</p>
+        <p><i class="fa-solid fa-envelope"></i> uks.smartcare@gmail.com</p>
+      </div>
+      <div>
+        <h3>Sosial Media</h3>
+        <div class="social">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-tiktok"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 UKS SmartCare</div>
+  </footer>
+
+  <script>
+    const navMenu=document.getElementById('navMenu');
+    function toggleMenu(){navMenu.classList.toggle('active')}
+
+    const slots=[
+      {label:"07.00 – 09.00",start:7,end:9},
+      {label:"09.00 – 11.00",start:9,end:11},
+      {label:"11.00 – 13.00",start:11,end:13},
+      {label:"13.00 – 15.00",start:13,end:15}
+    ];
+
+    const mingguData={1:{data:["Kel 1A","Kel 1B","Kel 1A","Kel 1B"]}};
+
+    const now=new Date();
+    const hariIndo=["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"];
+    hari.textContent=hariIndo[now.getDay()]+" (Senin–Jumat)";
+    minggu.textContent="Shift Aktif";
+
+    const jam=now.getHours()+now.getMinutes()/60;
+    const idx=slots.findIndex(s=>jam>=s.start&&jam<s.end);
+    if(idx>-1){
+      p1.textContent=p2.textContent=p3.textContent=mingguData[1].data[idx];
+      slot.textContent="⏱ "+slots[idx].label;
+    }else slot.textContent="⏱ Di luar jam UKS";
+
+    function updateClock(){
+      clock.textContent="🕒 "+new Date().toLocaleTimeString('id-ID',{
+        hour:'2-digit',minute:'2-digit',second:'2-digit'
+      })+" WIB";
+    }
+    updateClock();
+    setInterval(updateClock,1000);
+
+  // ANIMASI KELUAR HALAMAN
+    document.querySelectorAll('.card-link').forEach(link=>{
+    link.addEventListener('click',e=>{
+      e.preventDefault();
+      document.body.classList.add('page-exit');
+      setTimeout(()=>{
+        window.location.href=link.href;
+      },500);
+    });
+  });
+  </script>
+</body>
+</html>

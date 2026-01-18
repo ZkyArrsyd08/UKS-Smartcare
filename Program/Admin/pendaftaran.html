@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daftar Petugas | UKS SmartCare</title>
+<link rel="icon" href="../pmi.png" type="image/png">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+:root{
+    --red:#c8102e;
+    --red-dark:#a50e26;
+    --bg:#f9fafb;
+    --dark:#212529;
+    --gray:#6c757d;
+    --white:#fff;
+    --shadow-light: rgba(0,0,0,0.08);
+    --shadow-heavy: rgba(0,0,0,0.25);
+    --max-width: 900px;
+}
+
+/* RESET */
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--dark);display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px;position:relative;overflow:hidden;}
+
+/* FLOATING MEDICAL ICONS */
+.floating-icon{
+    position:absolute;
+    font-size:50px;
+    color:rgba(200,16,46,0.05);
+    animation:float 10s linear infinite;
+    pointer-events:none;
+}
+.floating-icon:nth-child(1){top:10%;left:5%;animation-duration:12s;}
+.floating-icon:nth-child(2){top:30%;right:10%;animation-duration:15s;}
+.floating-icon:nth-child(3){top:60%;left:20%;animation-duration:18s;}
+.floating-icon:nth-child(4){top:80%;right:25%;animation-duration:20s;}
+@keyframes float{
+    0%{transform:translateY(0px) rotate(0deg);}
+    50%{transform:translateY(-20px) rotate(180deg);}
+    100%{transform:translateY(0px) rotate(360deg);}
+}
+
+/* CONTAINER */
+.register-wrapper{
+    display:flex;
+    max-width:var(--max-width);
+    width:90%;
+    background:var(--white);
+    border-radius:20px;
+    box-shadow:0 25px 50px rgba(0,0,0,0.15);
+    overflow:hidden;
+    animation:fadeIn 1s ease forwards;
+    position:relative;
+}
+
+/* LEFT FORM */
+.left-panel-form{
+    flex:1;
+    padding:40px 35px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    z-index:2;
+    position:relative;
+}
+.left-panel-form h1{font-size:28px;font-weight:700;margin-bottom:8px;color:var(--red-dark);}
+.left-panel-form > p{font-size:14px;color:var(--gray);margin-bottom:20px;}
+.input-group{margin-bottom:15px;}
+.input-group label{display:block;font-size:14px;font-weight:500;margin-bottom:5px;color:var(--dark);}
+.input-group input{
+    width:100%;
+    padding:10px 12px;
+    font-size:14px;
+    border:1px solid #e0e0e0;
+    border-radius:10px;
+    transition:0.3s;
+}
+.input-group input:focus{
+    border-color:var(--red);
+    box-shadow:0 0 0 3px rgba(200,16,46,0.1);
+    outline:none;
+}
+.btn-register{
+    width:100%;
+    padding:12px;
+    background:var(--red);
+    color:var(--white);
+    font-weight:700;
+    font-size:15px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    transition:all 0.3s ease;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+.btn-register:hover{
+    background:var(--red-dark);
+    transform:translateY(-2px);
+    box-shadow:0 8px 15px var(--shadow-light);
+}
+.back-link{
+    display:block;
+    margin-top:15px;
+    text-align:center;
+    font-size:13px;
+    color:var(--gray);
+    text-decoration:none;
+    transition:0.3s;
+}
+.back-link:hover{color:var(--red);}
+
+/* RIGHT PANEL */
+.right-panel-branding{
+    flex:1;
+    background: linear-gradient(135deg,var(--red) 0%, var(--red-dark) 100%);
+    color:var(--white);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:35px;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+}
+.right-panel-branding img{width:80px;height:80px;margin-bottom:15px;}
+.right-panel-branding h2{font-size:26px;font-weight:700;margin-bottom:8px;}
+.right-panel-branding p{font-size:14px;line-height:1.4;opacity:0.9;}
+.right-panel-branding::after{
+    content:'';
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:100%;
+    height:100px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='0.1' d='M0,192L48,181.3C96,171,192,149,288,149.3C384,149,480,171,576,165.3C672,160,768,128,864,138.7C960,149,1056,203,1152,208C1248,213,1344,171,1392,149.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+    background-size:cover;
+    opacity:0.5;
+    transform:scaleX(-1);
+}
+
+/* ANIMASI */
+@keyframes fadeIn{from{opacity:0;transform:scale(0.95);}to{opacity:1;transform:scale(1);}}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+    .register-wrapper{flex-direction:column;height:auto;}
+    .right-panel-branding{display:none;}
+    .left-panel-form{padding:40px 25px;}
+}
+</style>
+</head>
+<body>
+
+<!-- FLOATING ICONS -->
+<i class="fas fa-pills floating-icon"></i>
+<i class="fas fa-heart-pulse floating-icon"></i>
+<i class="fas fa-syringe floating-icon"></i>
+<i class="fas fa-stethoscope floating-icon"></i>
+
+<div class="register-wrapper">
+
+    <div class="left-panel-form">
+        <h1>Daftar Petugas</h1>
+        <p>Lengkapi data di bawah ini untuk mendaftar sebagai Administrator UKS.</p>
+
+        <form id="daftarForm">
+            <div class="input-group">
+                <label for="nama"><i class="fa-solid fa-file-signature" style="margin-right:5px;color:var(--red);"></i> Nama Lengkap</label>
+                <input type="text" id="nama" placeholder="Masukkan nama lengkap" required>
+            </div>
+            <div class="input-group">
+                <label for="username"><i class="fa-solid fa-user" style="margin-right:5px;color:var(--red);"></i> Username</label>
+                <input type="text" id="username" placeholder="Masukkan username" required>
+            </div>
+            <div class="input-group">
+                <label for="password"><i class="fa-solid fa-lock" style="margin-right:5px;color:var(--red);"></i> Password</label>
+                <input type="password" id="password" placeholder="Masukkan password" required>
+            </div>
+            <div class="input-group">
+                <label for="keyword"><i class="fa-solid fa-key" style="margin-right:5px;color:var(--red);"></i> Keyword Petugas</label>
+                <input type="password" id="keyword" placeholder="Masukkan keyword rahasia" required>
+            </div>
+
+            <button type="submit" class="btn-register">
+                <i class="fa-solid fa-user-plus" style="margin-right:8px;"></i> DAFTAR SEKARANG
+            </button>
+        </form>
+
+        <a href="loginadmin.html" class="back-link">← Sudah punya akun? Kembali ke Login</a>
+    </div>
+
+    <div class="right-panel-branding">
+        <img src="../pmi.png" alt="Logo PMI">
+        <h2>Pendaftaran Petugas UKS</h2>
+        <p>Akses ini hanya diperuntukkan bagi anggota yang bertugas dan telah menerima Keyword Registrasi resmi.</p>
+    </div>
+
+</div>
+
+<script>
+const daftarForm = document.getElementById('daftarForm');
+daftarForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    const nama = document.getElementById('nama').value.trim();
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value.trim();
+    const keyword = document.getElementById('keyword').value.trim();
+
+    if(keyword !== "PMRMILLENIUM"){
+        alert("Keyword salah! Hanya petugas yang memiliki keyword valid bisa mendaftar.");
+        return;
+    }
+
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+    if(users.some(u => u.username === username)){
+        alert("Username sudah digunakan! Silakan pilih username lain.");
+        return;
+    }
+
+    users.push({nama, username, password, role:"admin"});
+    localStorage.setItem("users", JSON.stringify(users));
+
+    alert("Pendaftaran berhasil! Anda akan diarahkan ke halaman login.");
+    window.location.href = "loginadmin.html";
+});
+</script>
+
+</body>
+</html>

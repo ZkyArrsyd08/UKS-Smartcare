@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login | UKS SmartCare</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+:root{
+  --red:#c8102e;
+  --red-dark:#a50e26;
+  --light:#f9f9f9;
+  --dark:#212529;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  font-family:'Poppins',sans-serif;
+  background:var(--light);
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  color:var(--dark);
+}
+
+/* ORNAMEN */
+.bg-accent{
+  position:absolute;
+  bottom:-200px;
+  left:-200px;
+  width:520px;
+  height:520px;
+  background:var(--red);
+  border-radius:50%;
+  opacity:.08;
+  animation: floatSlow 18s ease-in-out infinite;
+}
+.bg-accent2{
+  position:absolute;
+  top:-160px;
+  right:-160px;
+  width:420px;
+  height:420px;
+  background:var(--red);
+  border-radius:50%;
+  opacity:.05;
+  animation: floatSlowReverse 22s ease-in-out infinite;
+}
+
+/* CONTAINER */
+.container{
+  background:#fff;
+  width:100%;
+  max-width:380px;
+  padding:45px 35px;
+  border-radius:18px;
+  box-shadow:0 18px 40px rgba(0,0,0,.12);
+  text-align:center;
+  z-index:2;
+  border-top:6px solid var(--red);
+  animation: fadeIn .8s ease forwards;
+}
+
+/* LOGO */
+.logo{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  font-size:24px;
+  font-weight:900;
+  color:var(--red);
+}
+.logo i{font-size:32px}
+
+.subtitle{
+  font-size:13px;
+  margin-top:6px;
+  margin-bottom:30px;
+  color:#666;
+  font-weight:600;
+}
+
+/* TITLE */
+h1{
+  font-size:22px;
+  font-weight:800;
+  margin-bottom:6px;
+}
+.desc{
+  font-size:14px;
+  color:#777;
+  margin-bottom:35px;
+}
+
+/* BUTTON */
+.login-options{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+.login-btn{
+  padding:14px;
+  border-radius:12px;
+  font-weight:700;
+  font-size:15px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  text-decoration:none;
+  transition:.3s;
+}
+
+/* ADMIN */
+.btn-admin{
+  background:linear-gradient(145deg,var(--red),var(--red-dark));
+  color:#fff;
+  box-shadow:0 8px 20px rgba(200,16,46,.45);
+}
+.btn-admin:hover{
+  transform:translateY(-3px);
+  box-shadow:0 14px 30px rgba(200,16,46,.6);
+}
+
+/* CIVITAS */
+.btn-civitas{
+  background:#fff;
+  color:var(--red);
+  border:2px solid var(--red);
+}
+.btn-civitas:hover{
+  background:#fff5f5;
+  transform:translateY(-3px);
+}
+
+/* DIVIDER */
+.divider{
+  font-size:13px;
+  color:#aaa;
+  font-weight:600;
+  position:relative;
+}
+.divider::before,
+.divider::after{
+  content:"";
+  position:absolute;
+  top:50%;
+  width:35%;
+  height:1px;
+  background:#ddd;
+}
+.divider::before{left:0}
+.divider::after{right:0}
+
+/* ANIMATION */
+@keyframes fadeIn{
+  from{opacity:0;transform:scale(.9)}
+  to{opacity:1;transform:scale(1)}
+}
+@keyframes floatSlow{
+  0%{transform:translate(0,0)}
+  50%{transform:translate(25px,-30px)}
+  100%{transform:translate(0,0)}
+}
+@keyframes floatSlowReverse{
+  0%{transform:translate(0,0)}
+  50%{transform:translate(-30px,25px)}
+  100%{transform:translate(0,0)}
+}
+
+/* RESPONSIVE */
+@media(max-width:480px){
+  .container{
+    margin:20px;
+    padding:35px 25px;
+  }
+  .bg-accent,.bg-accent2{display:none}
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="bg-accent"></div>
+<div class="bg-accent2"></div>
+
+<div class="container">
+
+  <div class="logo">
+    <i class="fa-solid fa-heart-pulse"></i>
+    UKS SmartCare
+  </div>
+  <div class="subtitle">Layanan Kesehatan Sekolah Digital</div>
+
+  <h1>Pilih Jenis Login</h1>
+  <div class="desc">
+    Masuk sesuai peran Anda dalam sistem UKS
+  </div>
+
+  <div class="login-options">
+    <a href="../Program/Admin/loginadmin.html" class="login-btn btn-admin">
+      <i class="fa-solid fa-user-gear"></i>
+      Login sebagai Admin
+    </a>
+
+    <div class="divider">atau</div>
+
+    <a href="../Program/Civitas/halamancivitas.html" class="login-btn btn-civitas">
+      <i class="fa-solid fa-users"></i>
+      Masuk sebagai Civitas
+    </a>
+  </div>
+
+</div>
+
+</body>
+</html>
